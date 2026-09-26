@@ -43,10 +43,11 @@ staging → intermediate → marts
 ## Local setup
 
 ```powershell
-uv sync               # create .venv and install dependencies
-uv run pytest         # run tests
-uv run ruff check .   # lint
-uv run mypy src       # type-check
+uv sync                 # create .venv and install dependencies
+uv run retail-ingest    # pull DummyJSON data into data/raw/
+uv run pytest           # run tests
+uv run ruff check .     # lint
+uv run mypy src         # type-check
 ```
 
 ## Status

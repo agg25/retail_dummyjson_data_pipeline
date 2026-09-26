@@ -1,7 +1,12 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "retail-dummyjson-data-pipeline"
 version = "0.1.0"
 description = "Retail/e-commerce data pipeline: ingest the DummyJSON API into BigQuery and transform it with dbt."
+readme = "README.md"
 requires-python = ">=3.11,<3.12"
 dependencies = [
     "httpx>=0.27",
@@ -10,6 +15,9 @@ dependencies = [
     "python-dotenv>=1.0",
 ]
 
+[project.scripts]
+retail-ingest = "retail_dummyjson_pipeline.ingest:main"
+
 [dependency-groups]
 dev = [
     "pytest>=8.0",
@@ -17,8 +25,8 @@ dev = [
     "mypy>=1.10",
 ]
 
-[tool.uv]
-package = false
+[tool.hatch.build.targets.wheel]
+packages = ["src/retail_dummyjson_pipeline"]
 
 [tool.ruff]
 line-length = 100
