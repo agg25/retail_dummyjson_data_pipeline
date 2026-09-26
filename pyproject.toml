@@ -14,11 +14,13 @@ dependencies = [
     "pyarrow>=16.0",
     "python-dotenv>=1.0",
     "dbt-bigquery>=1.8",
+    "prefect>=3.0",
 ]
 
 [project.scripts]
 retail-ingest = "retail_dummyjson_pipeline.ingest:main"
 retail-load-bq = "retail_dummyjson_pipeline.load_bigquery:main"
+retail-orchestrate = "retail_dummyjson_pipeline.flows:retail_pipeline"
 
 [dependency-groups]
 dev = [
@@ -39,6 +41,10 @@ select = ["E", "F", "I", "UP", "B"]
 
 [tool.mypy]
 python_version = "3.11"
+
+[[tool.mypy.overrides]]
+module = ["prefect.*"]
+follow_imports = "skip"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

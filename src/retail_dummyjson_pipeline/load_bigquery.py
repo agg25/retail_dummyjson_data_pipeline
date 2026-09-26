@@ -46,15 +46,8 @@ def _load_table(
     print(f"Loaded {table_id}: {len(pandas_df)} rows")
 
 
-def main() -> None:
-    """CLI entry point: load the local raw layer into BigQuery."""
-    from dotenv import load_dotenv
-
-    load_dotenv()
-    project = os.getenv("GCP_PROJECT_ID", DEFAULT_PROJECT)
-    dataset_id = os.getenv("BIGQUERY_DATASET", DEFAULT_DATASET)
-    raw_dir = Path(os.getenv("RAW_DATA_DIR", "data/raw"))
-
+def load_raw_layer(project: str, dataset_id: str, raw_dir: Path) -> None:
+    """Create the dataset (if needed) and load all raw Parquet files into BigQuery."""
     client = bigquery.Client(project=project)
 
     dataset_ref = bigquery.DatasetReference(project, dataset_id)
@@ -70,6 +63,17 @@ def main() -> None:
             print(f"SKIPPED {table_id}: {path} not found (run `uv run retail-ingest` first)")
             continue
         _load_table(client, project, dataset_id, table_id, pl.read_parquet(path))
+
+
+def main() -> None:
+    """CLI entry point: load the local raw layer into BigQuery."""
+    from dotenv import load_dotenv
+
+    load_dotenv()
+    project = os.getenv("GCP_PROJECT_ID", DEFAULT_PROJECT)
+    dataset_id = os.getenv("BIGQUERY_DATASET", DEFAULT_DATASET)
+    raw_dir = Path(os.getenv("RAW_DATA_DIR", "data/raw"))
+    load_raw_layer(project, dataset_id, raw_dir)
 
 
 if __name__ == "__main__":

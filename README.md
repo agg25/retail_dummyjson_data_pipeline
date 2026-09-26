@@ -25,7 +25,7 @@ staging → intermediate → marts
 | Warehouse | Google BigQuery (free tier) |
 | Transformation | dbt-core + dbt-bigquery |
 | Data quality | dbt tests (elementary later) |
-| Orchestration | Prefect (later) |
+| Orchestration | Prefect |
 | Containerisation | Docker (later) |
 | CI/CD | GitHub Actions (later) |
 | IaC | Terraform (later) |
@@ -52,6 +52,14 @@ uv run mypy src         # type-check
 ```
 
 ## Running the pipeline
+
+Run the whole thing end-to-end with Prefect:
+
+```powershell
+uv run retail-orchestrate
+```
+
+Or run each step manually:
 
 ```powershell
 uv run retail-ingest     # 1. DummyJSON API -> data/raw/*.parquet
