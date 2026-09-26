@@ -1,5 +1,7 @@
 # retail_dummyjson_data_pipeline
 
+[![CI](https://github.com/agg25/retail_dummyjson_data_pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/agg25/retail_dummyjson_data_pipeline/actions)
+
 End-to-end data engineering pipeline for **retail/e-commerce analytics**, ingesting the free
 [DummyJSON](https://dummyjson.com) API into **Google BigQuery** and transforming it with **dbt**.
 
