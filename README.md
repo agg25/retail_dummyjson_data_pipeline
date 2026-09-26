@@ -44,11 +44,35 @@ staging → intermediate → marts
 
 ```powershell
 uv sync                 # create .venv and install dependencies
-uv run retail-ingest    # pull DummyJSON data into data/raw/
 uv run pytest           # run tests
 uv run ruff check .     # lint
 uv run mypy src         # type-check
 ```
+
+## Running the pipeline
+
+```powershell
+uv run retail-ingest     # 1. DummyJSON API -> data/raw/*.parquet
+uv run retail-load-bq    # 2. Parquet -> BigQuery raw_* tables
+uv run dbt run --project-dir dbt --profiles-dir dbt      # 3. build staging/intermediate/marts
+uv run dbt test --project-dir dbt --profiles-dir dbt     # 4. run data quality tests
+uv run dbt docs generate --project-dir dbt --profiles-dir dbt  # 5. generate lineage docs
+```
+
+> **Note:** `dbt/profiles.yml` is gitignored (personal config). Create it manually
+> before running dbt:
+> ```yaml
+> retail_dummyjson:
+>   target: dev
+>   outputs:
+>     dev:
+>       type: bigquery
+>       method: oauth
+>       project: <your-gcp-project-id>
+>       dataset: retail_dummyjson
+>       threads: 1
+>       location: US
+> ```
 
 ## Status
 

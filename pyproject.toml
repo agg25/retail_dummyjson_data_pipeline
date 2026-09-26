@@ -13,10 +13,12 @@ dependencies = [
     "polars>=1.0",
     "pyarrow>=16.0",
     "python-dotenv>=1.0",
+    "dbt-bigquery>=1.8",
 ]
 
 [project.scripts]
 retail-ingest = "retail_dummyjson_pipeline.ingest:main"
+retail-load-bq = "retail_dummyjson_pipeline.load_bigquery:main"
 
 [dependency-groups]
 dev = [

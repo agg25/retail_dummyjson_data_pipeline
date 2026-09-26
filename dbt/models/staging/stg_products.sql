@@ -1,0 +1,20 @@
+select
+    id as product_id,
+    title,
+    description,
+    category,
+    price,
+    discountPercentage as discount_percentage,
+    rating,
+    stock,
+    brand,
+    sku,
+    weight,
+    availabilityStatus as availability_status,
+    minimumOrderQuantity as minimum_order_quantity,
+    thumbnail,
+    tags,
+    dimensions,
+    reviews,
+    meta
+from {{ source('retail_dummyjson', 'raw_products') }}

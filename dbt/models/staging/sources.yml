@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: retail_dummyjson
+    database: retail-pipeline-509804
+    schema: retail_dummyjson
+    tables:
+      - name: raw_products
+      - name: raw_users
+      - name: raw_carts
+      - name: raw_cart_items
