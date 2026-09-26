@@ -1,0 +1,27 @@
+name: 'retail_dummyjson'
+version: '1.0.0'
+config-version: 2
+
+# Profile name maps to dbt/profiles.yml (created later during BigQuery setup).
+profile: 'retail_dummyjson'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  retail_dummyjson:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
