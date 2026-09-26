@@ -38,6 +38,7 @@ dbt/target/
 dbt/dbt_packages/
 dbt/logs/
 dbt/profiles.yml
+dbt/.user.yml
 
 # ===== Generated data (raw/bronze/silver/gold) =====
 data/raw/*
